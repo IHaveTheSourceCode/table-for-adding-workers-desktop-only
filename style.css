@@ -30,11 +30,11 @@
   font-size: 1.2rem;
 }
 
-.container {
+.container-main {
   width: 1000px;
-  max-height: 90vh;
-  margin: 2rem;
-  padding: 1.5rem;
+  height: fit-content;
+  margin: 2vw;
+  padding: 2vw;
   border-radius: 25px;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
 }
@@ -47,6 +47,9 @@
 .table-inputs {
   display: flex;
   justify-content: space-between;
+  border: 2px solid var(--clr-border);
+  border-radius: 15px;
+  padding: 20px;
 }
 
 .btn-download {
@@ -72,9 +75,6 @@
 }
 
 .to-do {
-}
-
-.container {
 }
 
 footer {
@@ -107,12 +107,18 @@ footer {
 }
 
 .input-container:hover,
-.input-container:active {
+.input-container:active,
+.wrapper:hover,
+.wrapper:active {
   border: 2px solid black;
 }
 
 input::-webkit-calendar-picker-indicator {
   opacity: 1;
+}
+
+.search-department {
+  margin-top: 0.4rem;
 }
 
 .img-search {
@@ -146,107 +152,120 @@ input::-webkit-calendar-picker-indicator {
   font-size: 1.4rem;
 }
 
+.wrapper {
+  position: relative;
+  width: 300px;
+  background-color: #ffffff;
+  padding: 10px 15px 10px 15px;
+  border-radius: 10px;
+  border: 2px solid var(--clr-border);
+}
+
+.container {
+  position: relative;
+  width: 100%;
+  height: 20px;
+  margin-top: 20px;
+}
+
 input[type="range"] {
   -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: 100%;
+  outline: none;
+  position: absolute;
+  margin: auto;
+  top: 0;
+  bottom: 0;
+  background-color: transparent;
+  pointer-events: none;
+}
+
+.slider-track {
+  width: 100%;
+  height: 5px;
+  position: absolute;
+  margin: auto;
+  top: 0;
+  bottom: 0;
+  border-radius: 5px;
 }
 
 input[type="range"]::-webkit-slider-runnable-track {
-  width: var(--range-slider-width);
-  height: var(--range-slider-height);
-  background: var(--range-slider-color);
-  border: none;
-  border-radius: 3px;
+  -webkit-appearance: none;
+  height: 5px;
+}
+
+input[type="range"]::-moz-range-track {
+  -moz-appearance: none;
+  height: 5px;
+}
+
+input[type="range"]::-ms-track {
+  appearance: none;
+  height: 5px;
 }
 
 input[type="range"]::-webkit-slider-thumb {
   -webkit-appearance: none;
-  border: none;
-  height: var(--range-thumb-height);
-  width: var(--range-thumb-width);
+  height: 1.7em;
+  width: 1.7em;
+  background-color: black;
+  cursor: pointer;
+  margin-top: -9px;
+  pointer-events: auto;
   border-radius: 50%;
-  background: var(--range-thumb-color);
-  margin-top: -4px;
-}
-
-input[type="range"]:focus {
-  outline: none;
-}
-
-input[type="range"]:focus::-webkit-slider-runnable-track {
-  background: #ccc;
-}
-
-input[type="range"] {
-  /* fix for FF unable to apply focus style bug  */
-  border: 1px solid white;
-
-  /*required for proper track sizing in FF*/
-  width: 300px;
-}
-
-input[type="range"]::-moz-range-track {
-  width: var(--range-slider-width);
-  height: var(--range-slider-height);
-  background: var(--range-slider-color);
-  border: none;
-  border-radius: 3px;
 }
 
 input[type="range"]::-moz-range-thumb {
-  border: none;
-  height: var(--range-thumb-height);
-  width: var(--range-thumb-width);
+  -webkit-appearance: none;
+  height: 1.5em;
+  width: 1.5em;
+  cursor: pointer;
   border-radius: 50%;
-  background: var(--range-thumb-color);
-}
-
-/*hide the outline behind the border*/
-input[type="range"]:-moz-focusring {
-  outline: 1px solid white;
-  outline-offset: -1px;
-}
-
-input[type="range"]:focus::-moz-range-track {
-  background: #ccc;
-}
-
-input[type="range"]::-ms-track {
-  width: var(--range-slider-width);
-  height: var(--range-slider-height);
-
-  /*remove bg colour from the track, we'll use ms-fill-lower and ms-fill-upper instead */
-  background: transparent;
-
-  /*leave room for the larger thumb to overflow with a transparent border */
-  border-color: transparent;
-  border-width: 6px 0;
-
-  /*remove default tick marks*/
-  color: transparent;
-}
-
-input[type="range"]::-ms-fill-lower {
-  background: var(--range-slider-color);
-  border-radius: 10px;
-}
-
-input[type="range"]::-ms-fill-upper {
-  background: #ddd;
-  border-radius: 10px;
+  background-color: black;
+  pointer-events: auto;
 }
 
 input[type="range"]::-ms-thumb {
-  border: none;
-  height: var(--range-thumb-height);
-  width: var(--range-thumb-width);
+  appearance: none;
+  height: 1.7em;
+  width: 1.7em;
+  cursor: pointer;
   border-radius: 50%;
-  background: var(--range-thumb-color);
+  background-color: black;
+  pointer-events: auto;
 }
 
-input[type="range"]:focus::-ms-fill-lower {
-  background: #888;
+input[type="range"]:active::-webkit-slider-thumb {
+  background-color: #ffffff;
+  border: 3px solid black;
 }
 
-input[type="range"]:focus::-ms-fill-upper {
-  background: #ccc;
+.values {
+  background-color: black;
+  width: 46%;
+  position: relative;
+  margin: auto;
+  padding: 5px 0;
+  border-radius: 5px;
+  text-align: center;
+  font-weight: 500;
+  font-size: 1.2;
+  color: #ffffff;
+}
+
+.values:before {
+  content: "";
+  position: absolute;
+  height: 0;
+  width: 0;
+  border-top: 15px solid black;
+  border-left: 15px solid transparent;
+  border-right: 15px solid transparent;
+  margin: auto;
+  bottom: -14px;
+  left: 0;
+  right: 0;
 }

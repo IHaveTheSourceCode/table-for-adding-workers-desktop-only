@@ -32,7 +32,7 @@
           <li>&lt;datalist&gt;</li>
         </ol>
       </div>
-      <div class="container">
+      <div class="container-main">
         <div class="table-header">
           <h2>Workers</h2>
           <button class="btn-download">
@@ -54,6 +54,7 @@
         </div>
         <div class="table-inputs">
           <!-- input for searching by person name -->
+          <div>
           <div class="search-person">
             <p class="label-text">Search for person:</p>
             <div class="input-container">
@@ -73,15 +74,27 @@
                 <option value="Administration">
               </datalist>
             </div>
-          </div>
-          <!-- input[type="range"] for searching by salary -->
-          <div class="search-salary">
-            <p class="label-text">Salary:</p>
-            <div class="salary-input-container">
-              <input type="range" min="0" max="20000" step="10" value="10000" oninput="this.nextElementSibling.innerText = this.value + ' USD'">
-              <p class="salary-value">15000 USD</p>
             </div>
           </div>
+          <!-- input[type="range"] for searching by salary -->
+          <!-- https://codingartistweb.com/2021/06/double-range-slider-html-css-javascript/ -->
+          <div class="wrapper">
+                  <div class="values">
+                      <span id="range1">
+                        0$
+                      </span>
+                      <span> &dash; </span>
+                      <span id="range2">
+                        20000$
+                      </span>
+                  </div>
+                  <div class="container">
+                      <div class="slider-track"></div>
+                      <input type="range" min="0" max="20000" value="0" id="slider-1" oninput="slideOne()">
+                      <input type="range" min="0" max="20000" value="20000" id="slider-2" oninput="slideTwo()">
+                  </div>
+              </div>
+    
         </div>
         <table border="1">
           <tbody>
@@ -191,6 +204,43 @@
           },
         },
       });
+    </script>
+    <!-- part of the double sided slider input -->
+    <script>
+    window.onload = function(){
+    slideOne();
+    slideTwo();
+}
+
+    let sliderOne = document.getElementById("slider-1");
+    let sliderTwo = document.getElementById("slider-2");
+    let displayValOne = document.getElementById("range1");
+    let displayValTwo = document.getElementById("range2");
+    let minGap = 0;
+    let sliderTrack = document.querySelector(".slider-track");
+    let sliderMaxValue = document.getElementById("slider-1").max;
+
+    function slideOne(){
+        if(parseInt(sliderTwo.value) - parseInt(sliderOne.value) <= minGap){
+            sliderOne.value = parseInt(sliderTwo.value) - minGap;
+        }
+        displayValOne.textContent = sliderOne.value + "$";
+        fillColor();
+    }
+
+    function slideTwo(){
+        if(parseInt(sliderTwo.value) - parseInt(sliderOne.value) <= minGap){
+            sliderTwo.value = parseInt(sliderOne.value) + minGap;
+        }
+        displayValTwo.textContent = sliderTwo.value + "$";
+        fillColor();
+    }
+    
+    function fillColor(){
+        percent1 = (sliderOne.value / sliderMaxValue) * 100;
+        percent2 = (sliderTwo.value / sliderMaxValue) * 100;
+        sliderTrack.style.background = `linear-gradient(to right, #dadae5 ${percent1}% , #000000cc ${percent1}% , #000000cc ${percent2}%, #dadae5 ${percent2}%)`;
+    } 
     </script>
   </body>
 </html>
