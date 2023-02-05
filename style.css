@@ -1,0 +1,252 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;500&display=swap");
+
+:root {
+  --clr-background: rgb(255, 255, 255);
+  --clr-text: rgb(0, 0, 0);
+  --clr-border: rgba(0, 0, 0, 0.2);
+  --clr-fill: rgb(221, 255, 85);
+
+  --font-main: "Roboto", sans-serif;
+
+  --range-thumb-width: 20px;
+  --range-thumb-height: 20px;
+  --range-slider-width: 300px;
+  --range-slider-height: 5px;
+  --range-thumb-color: rgb(0, 0, 0);
+  --range-slider-color: rgba(0, 0, 0, 0.2);
+}
+
+* {
+  margin: 0;
+  font-family: var(--font-main);
+}
+
+#app {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  background-color: var(--clr-background);
+  color: var(--clr-text);
+  font-size: 1.2rem;
+}
+
+.container {
+  width: 1000px;
+  max-height: 90vh;
+  margin: 2rem;
+  padding: 1.5rem;
+  border-radius: 25px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+}
+
+.table-header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.table-inputs {
+  display: flex;
+  justify-content: space-between;
+}
+
+.btn-download {
+  display: flex;
+  font-family: var(--font-main);
+  font-weight: bold;
+  font-size: 1.4rem;
+  padding: 0.8rem;
+  padding-top: 0.2rem;
+  padding-bottom: 0.2rem;
+  border: 3px solid var(--clr-border);
+  border-radius: 8px;
+  background-color: transparent;
+}
+
+.btn-download:hover {
+  cursor: pointer;
+  background-color: var(--clr-fill);
+}
+
+.img-download {
+  margin-right: 0.5rem;
+}
+
+.to-do {
+}
+
+.container {
+}
+
+footer {
+  position: absolute;
+  bottom: 0;
+  right: 1rem;
+}
+
+#input-departments::placeholder {
+  opacity: 1;
+}
+
+#input-departments {
+  font-size: 1.2rem;
+  outline: none;
+}
+
+.input-container {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+
+  display: flex;
+  align-items: center;
+  height: 2rem;
+  border: 2px solid gray;
+  border-radius: 8px;
+  width: 160px;
+  padding-left: 15px;
+}
+
+.input-container:hover,
+.input-container:active {
+  border: 2px solid black;
+}
+
+input::-webkit-calendar-picker-indicator {
+  opacity: 1;
+}
+
+.img-search {
+  margin-left: -5px;
+  width: 20px;
+  height: 20px;
+  opacity: 0.6;
+}
+
+.input-search {
+  border: none;
+  margin-left: 5px;
+  width: 120px;
+  font-size: 1.2rem;
+  outline: none;
+}
+
+.label-text {
+  font-size: 0.9rem;
+  font-weight: bold;
+  margin: 0;
+}
+
+.salary-input-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.salary-value {
+  font-size: 1.4rem;
+}
+
+input[type="range"] {
+  -webkit-appearance: none;
+}
+
+input[type="range"]::-webkit-slider-runnable-track {
+  width: var(--range-slider-width);
+  height: var(--range-slider-height);
+  background: var(--range-slider-color);
+  border: none;
+  border-radius: 3px;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  border: none;
+  height: var(--range-thumb-height);
+  width: var(--range-thumb-width);
+  border-radius: 50%;
+  background: var(--range-thumb-color);
+  margin-top: -4px;
+}
+
+input[type="range"]:focus {
+  outline: none;
+}
+
+input[type="range"]:focus::-webkit-slider-runnable-track {
+  background: #ccc;
+}
+
+input[type="range"] {
+  /* fix for FF unable to apply focus style bug  */
+  border: 1px solid white;
+
+  /*required for proper track sizing in FF*/
+  width: 300px;
+}
+
+input[type="range"]::-moz-range-track {
+  width: var(--range-slider-width);
+  height: var(--range-slider-height);
+  background: var(--range-slider-color);
+  border: none;
+  border-radius: 3px;
+}
+
+input[type="range"]::-moz-range-thumb {
+  border: none;
+  height: var(--range-thumb-height);
+  width: var(--range-thumb-width);
+  border-radius: 50%;
+  background: var(--range-thumb-color);
+}
+
+/*hide the outline behind the border*/
+input[type="range"]:-moz-focusring {
+  outline: 1px solid white;
+  outline-offset: -1px;
+}
+
+input[type="range"]:focus::-moz-range-track {
+  background: #ccc;
+}
+
+input[type="range"]::-ms-track {
+  width: var(--range-slider-width);
+  height: var(--range-slider-height);
+
+  /*remove bg colour from the track, we'll use ms-fill-lower and ms-fill-upper instead */
+  background: transparent;
+
+  /*leave room for the larger thumb to overflow with a transparent border */
+  border-color: transparent;
+  border-width: 6px 0;
+
+  /*remove default tick marks*/
+  color: transparent;
+}
+
+input[type="range"]::-ms-fill-lower {
+  background: var(--range-slider-color);
+  border-radius: 10px;
+}
+
+input[type="range"]::-ms-fill-upper {
+  background: #ddd;
+  border-radius: 10px;
+}
+
+input[type="range"]::-ms-thumb {
+  border: none;
+  height: var(--range-thumb-height);
+  width: var(--range-thumb-width);
+  border-radius: 50%;
+  background: var(--range-thumb-color);
+}
+
+input[type="range"]:focus::-ms-fill-lower {
+  background: #888;
+}
+
+input[type="range"]:focus::-ms-fill-upper {
+  background: #ccc;
+}

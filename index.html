@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Recruitment task</title>
+    <meta name="robots" content="noindex" />
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.24/browser.min.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <div class="todo">
+        <h1>TODO</h1>
+        <ol>
+          <template v-for="task in taskList">
+            <task-item :task="task">
+              <ol type="a" v-if="task.subtaskList">
+                <template v-for="subtask in task.subtaskList">
+                  <task-item :task="subtask"></task-item>
+                </template>
+              </ol>
+            </task-item>
+          </template>
+        </ol>
+        <h2>Hints</h2>
+        <ol>
+          <li>
+            yarn global add browser-sync<br />
+            browser-sync --watch .
+          </li>
+          <li>&lt;datalist&gt;</li>
+        </ol>
+      </div>
+      <div class="container">
+        <div class="table-header">
+          <h2>Workers</h2>
+          <button class="btn-download">
+            <img
+              class="img-download"
+              src="https://img.icons8.com/ios-glyphs/30/null/downloading-updates.png"
+              alt="download table as pdf."
+            ></img>
+            <p>PDF</p>
+          </button>
+          <button class="btn-download">
+            <img
+              class="img-download"
+              src="https://img.icons8.com/ios-glyphs/30/null/downloading-updates.png"
+              alt="download table as csv."
+            ></img>
+            <p>CSV</p>
+          </button>
+        </div>
+        <div class="table-inputs">
+          <!-- input for searching by person name -->
+          <div class="search-person">
+            <p class="label-text">Search for person:</p>
+            <div class="input-container">
+              <img class="img-search" alt="" src="https://img.icons8.com/ios-glyphs/30/null/search--v1.png">
+              <input class="input-search" type="text" placeholder="Search">
+            </div>
+          </div>
+          <!-- <datalist> input for searching by department -->
+          <div class="search-department">
+            <p class="label-text">Department:</p>
+            <div>
+              <input list="departments" id="input-departments" class="input-container" placeholder="View all">
+              <datalist id="departments">
+                <option value="View all">
+                <option value="IT">
+                <option value="Sales">
+                <option value="Administration">
+              </datalist>
+            </div>
+          </div>
+          <!-- input[type="range"] for searching by salary -->
+          <div class="search-salary">
+            <p class="label-text">Salary:</p>
+            <div class="salary-input-container">
+              <input type="range" min="0" max="20000" step="10" value="10000" oninput="this.nextElementSibling.innerText = this.value + ' USD'">
+              <p class="salary-value">15000 USD</p>
+            </div>
+          </div>
+        </div>
+        <table border="1">
+          <tbody>
+            <tr v-for="(worker, index) in workerList">
+              <td>{{index+1}}.</td>
+              <td>{{worker.firstName}}</td>
+              <td>{{worker.lastName}}</td>
+              <td>{{worker.department}}</td>
+              <td>{{worker.salary.amount}} {{worker.salary.currency}}</td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr>
+              <td colspan="3"></td>
+              <td>Summary</td>
+              <td>{{salarySum}} USD</td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+    </div>
+
+    <script>
+      const TaskItem = Vue.component("task-item", {
+        props: {
+          task: Object,
+        },
+        template:
+          '<li>{{task.title}} {{ task.completed ? "✅" : "❌"}}<slot name="default"></slot></li>',
+      });
+
+      new Vue({
+        el: "#app",
+        components: {
+          TaskItem,
+        },
+        data: {
+          workerList: [
+            {
+              firstName: "John",
+              lastName: "Smith",
+              department: "IT",
+              salary: { amount: 3000, currency: "USD" },
+            },
+            {
+              firstName: "Jane",
+              lastName: "Doe",
+              department: "IT",
+              salary: { amount: 3000.5, currency: "USD" },
+            },
+            {
+              firstName: "Bob",
+              lastName: "Colman",
+              department: "Sales",
+              salary: { amount: 9000, currency: "USD" },
+            },
+            {
+              firstName: "Barbara",
+              lastName: "O'Connor",
+              department: "Sales",
+              salary: { amount: 4000, currency: "USD" },
+            },
+            {
+              firstName: "Adam",
+              lastName: "Murphy",
+              department: "Administration",
+              salary: { amount: 2000, currency: "USD" },
+            },
+          ],
+          taskList: [
+            {
+              title: "Add form to add new worker",
+              completed: false,
+              subtaskList: [
+                { title: "firstName", completed: false },
+                { title: "lastName", completed: false },
+                { title: "department", completed: false },
+                { title: "salary amount and currency", completed: false },
+              ],
+            },
+            {
+              title: "Add search form",
+              completed: false,
+              subtaskList: [
+                { title: "person (text)", completed: false },
+                { title: "department (multiple choice)", completed: false },
+                { title: "salary (range)", completed: false },
+              ],
+            },
+            {
+              title: "Add summary of salary per department",
+              completed: false,
+            },
+            {
+              title: "Other improvements (feel free to add other improvements)",
+              completed: false,
+            },
+            {
+              title: "Please send us this file with your solutions",
+              completed: false,
+            },
+          ],
+        },
+        computed: {
+          salarySum() {
+            return this.workerList.reduce((acc, i) => acc + i.salary.amount, 0);
+          },
+        },
+      });
+    </script>
+  </body>
+</html>
