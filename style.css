@@ -192,7 +192,7 @@ input::-webkit-calendar-picker-indicator {
   border-bottom: none;
   border-top-left-radius: 12px;
   border-top-right-radius: 12px;
-  font-size: 1.2rem;
+  font-size: 1rem;
   background-color: var(--clr-text);
   color: var(--clr-background);
 }
@@ -202,19 +202,19 @@ input::-webkit-calendar-picker-indicator {
 }
 
 .table-heading > p:nth-child(2) {
-  margin-left: 50px;
+  margin-left: 54px;
 }
 
 .table-heading > p:nth-child(3) {
-  margin-left: 62px;
+  margin-left: 76px;
 }
 
 .table-heading > p:nth-child(4) {
-  margin-left: 90px;
+  margin-left: 107px;
 }
 
 .table-heading > p:nth-child(5) {
-  margin-left: 196px;
+  margin-left: 214px;
 }
 
 table {
@@ -230,6 +230,10 @@ td {
 
 tr:nth-child(even) {
   background-color: #ebeaea;
+}
+
+.summary-table-cell {
+  background-color: var(--clr-border);
 }
 
 .table-index {
