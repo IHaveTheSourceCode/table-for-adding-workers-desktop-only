@@ -4,7 +4,7 @@
   --clr-background: rgb(255, 255, 255);
   --clr-text: rgb(0, 0, 0);
   --clr-border: rgba(0, 0, 0, 0.2);
-  --clr-fill: rgb(221, 255, 85);
+  /* --clr-fill: rgb(221, 255, 85); */
 
   --font-main: "Roboto", sans-serif;
 
@@ -42,6 +42,7 @@
 .table-header {
   display: flex;
   justify-content: space-between;
+  margin-bottom: 15px;
 }
 
 .table-inputs {
@@ -50,24 +51,40 @@
   border: 2px solid var(--clr-border);
   border-radius: 15px;
   padding: 20px;
+  margin-bottom: 32px;
+}
+
+.header-buttons-container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 25px;
+}
+
+.header-buttons-container > .btn-download:first-child {
+  margin-right: 24px;
 }
 
 .btn-download {
   display: flex;
+  align-items: center;
   font-family: var(--font-main);
   font-weight: bold;
   font-size: 1.4rem;
   padding: 0.8rem;
   padding-top: 0.2rem;
   padding-bottom: 0.2rem;
-  border: 3px solid var(--clr-border);
+  border: 2px solid var(--clr-border);
   border-radius: 8px;
   background-color: transparent;
 }
 
 .btn-download:hover {
   cursor: pointer;
-  background-color: var(--clr-fill);
+  border: 2px solid var(--clr-text);
+}
+
+h2 {
+  font-size: 2.6rem;
 }
 
 .img-download {
@@ -100,7 +117,7 @@ footer {
   display: flex;
   align-items: center;
   height: 2rem;
-  border: 2px solid gray;
+  border: 2px solid var(--clr-border);
   border-radius: 8px;
   width: 160px;
   padding-left: 15px;
