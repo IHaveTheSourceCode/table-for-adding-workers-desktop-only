@@ -31,11 +31,12 @@
 }
 
 .container-main {
-  width: 1000px;
+  min-width: 1000px;
+  max-width: 1000px;
   min-height: 80vh;
   max-height: fit-content;
-  margin: 2vw;
-  padding: 2vw;
+  margin: 40px;
+  padding: 40px;
   border-radius: 25px;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
 }
@@ -48,7 +49,6 @@
 
 .table-inputs {
   display: flex;
-  /* justify-content: space-between; */
   border: 2px solid var(--clr-border);
   border-radius: 15px;
   padding: 20px;
@@ -175,13 +175,46 @@ input::-webkit-calendar-picker-indicator {
 }
 
 .vertical-line {
-  width: 4px;
+  width: 2px;
   background-color: var(--clr-border);
   height: 157px;
   margin-top: -20px;
   margin-bottom: -28px;
   margin-left: 30px;
   margin-right: 20px;
+}
+
+.table-heading {
+  display: flex;
+  align-items: center;
+  height: 26px;
+  border: 2px solid var(--clr-border);
+  border-bottom: none;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+  font-size: 1.2rem;
+  background-color: var(--clr-text);
+  color: var(--clr-background);
+}
+
+.table-heading > p:nth-child(1) {
+  margin-left: 28px;
+}
+
+.table-heading > p:nth-child(2) {
+  margin-left: 50px;
+}
+
+.table-heading > p:nth-child(3) {
+  margin-left: 62px;
+}
+
+.table-heading > p:nth-child(4) {
+  margin-left: 90px;
+}
+
+.table-heading > p:nth-child(5) {
+  margin-left: 196px;
 }
 
 table {
@@ -195,8 +228,12 @@ td {
   border-top: 2px solid var(--clr-border);
 }
 
+tr:nth-child(even) {
+  background-color: #ebeaea;
+}
+
 .table-index {
-  padding-left: 20px;
+  padding-left: 25px;
 }
 
 .wrapper {
