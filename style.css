@@ -32,7 +32,8 @@
 
 .container-main {
   width: 1000px;
-  height: fit-content;
+  min-height: 80vh;
+  max-height: fit-content;
   margin: 2vw;
   padding: 2vw;
   border-radius: 25px;
@@ -47,7 +48,7 @@
 
 .table-inputs {
   display: flex;
-  justify-content: space-between;
+  /* justify-content: space-between; */
   border: 2px solid var(--clr-border);
   border-radius: 15px;
   padding: 20px;
@@ -156,7 +157,11 @@ input::-webkit-calendar-picker-indicator {
 .label-text {
   font-size: 0.9rem;
   font-weight: bold;
-  margin: 0;
+  margin-left: 2px;
+}
+
+.label-range {
+  margin-left: 28px;
 }
 
 .salary-input-container {
@@ -169,13 +174,40 @@ input::-webkit-calendar-picker-indicator {
   font-size: 1.4rem;
 }
 
+.vertical-line {
+  width: 4px;
+  background-color: var(--clr-border);
+  height: 157px;
+  margin-top: -20px;
+  margin-bottom: -28px;
+  margin-left: 30px;
+  margin-right: 20px;
+}
+
+table {
+  border-collapse: collapse;
+  border: 2px solid var(--clr-border);
+  width: 100%;
+  font-size: 1.35rem;
+}
+
+td {
+  border-top: 2px solid var(--clr-border);
+}
+
+.table-index {
+  padding-left: 20px;
+}
+
 .wrapper {
   position: relative;
   width: 300px;
+  height: 74px;
   background-color: #ffffff;
   padding: 10px 15px 10px 15px;
   border-radius: 10px;
   border: 2px solid var(--clr-border);
+  margin-left: 25px;
 }
 
 .container {
@@ -262,7 +294,7 @@ input[type="range"]:active::-webkit-slider-thumb {
 
 .values {
   background-color: black;
-  width: 46%;
+  width: 56%;
   position: relative;
   margin: auto;
   padding: 5px 0;

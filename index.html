@@ -80,29 +80,43 @@
           </div>
           <!-- input[type="range"] for searching by salary -->
           <!-- https://codingartistweb.com/2021/06/double-range-slider-html-css-javascript/ -->
-          <div class="wrapper">
-                  <div class="values">
-                      <span id="range1">
-                        0$
-                      </span>
-                      <span> &dash; </span>
-                      <span id="range2">
-                        20000$
-                      </span>
-                  </div>
-                  <div class="container">
-                      <div class="slider-track"></div>
-                      <input type="range" min="0" max="20000" value="0" id="slider-1" oninput="slideOne()">
-                      <input type="range" min="0" max="20000" value="20000" id="slider-2" oninput="slideTwo()">
-                  </div>
+          <div>
+            <p class="label-text label-range">Salary range:</p>
+            <div class="wrapper">
+              <div class="values">
+                  <span id="range1">
+                    0$
+                  </span>
+                  <span> &dash; </span>
+                  <span id="range2">
+                    20000$
+                  </span>
               </div>
+              <div class="container">
+                  <div class="slider-track"></div>
+                  <input type="range" min="0" max="20000" value="0" id="slider-1" oninput="slideOne()">
+                  <input type="range" min="0" max="20000" value="20000" id="slider-2" oninput="slideTwo()">
+              </div>
+            </div>
+          </div>
+          <div class="vertical-line"></div>
               <!-- form for adding new workers -->
+              <form>
+                <label for="fname">First name:</label>
+                <input type="text" id="fname" name="fname">
+                <label for="lname">Last name:</label>
+                <input type="text" id="lname" name="lname">
+                <input type="">
+              </form>
               
         </div>
-        <table border="1">
+        <div class="table-heading">
+
+        </div>
+        <table border="0">
           <tbody>
             <tr v-for="(worker, index) in workerList">
-              <td>{{index+1}}.</td>
+              <td class="table-index">{{index+1}}.</td>
               <td>{{worker.firstName}}</td>
               <td>{{worker.lastName}}</td>
               <td>{{worker.department}}</td>
