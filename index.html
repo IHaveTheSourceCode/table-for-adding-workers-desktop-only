@@ -102,24 +102,36 @@
           <div class="vertical-line"></div>
           <!-- form for adding new workers -->
           <div class="add-new-worker-wrapper">
-            <p class="label-text">Add new worker</p>
             <div class="add-new-worker-inputs">
               <div class="add-new-worker-data-inputs">
                 <div class="form-input">
                   <p class="label-text">First name:</p>
-                  <input type="text">
+                  <input type="text" class="classic-input">
                 </div>
                 <div class="form-input">
                   <p class="label-text">Last name:</p>
-                  <input type="text">
+                  <input type="text" class="classic-input">
                 </div>
                 <div class="form-input">
+                  <p class="label-text">Department:</p>
+                  <div>
+                    <input list="departments-form" id="input-departments-form" class="classic-input" placeholder="View all">
+                    <datalist id="departments-form">
+                      <option value="IT">
+                      <option value="Sales">
+                      <option value="Administration">
+                    </datalist>
+                  </div>
                 </div>
                 <div class="form-input">
+                  <p class="label-text">Salary:</p>
+                  <div class="form-salary">
+                    <input class="number">
+                  </div>
                 </div>
               </div>
-              <button></button>
             </div>
+            <button></button>
           </div>   
               
         </div>

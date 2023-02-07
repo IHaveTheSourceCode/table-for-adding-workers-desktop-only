@@ -2,7 +2,7 @@
 
 :root {
   --clr-background: rgb(255, 255, 255);
-  --clr-text: rgb(0, 0, 0);
+  --clr-text: #28282b;
   --clr-border: rgba(0, 0, 0, 0.2);
   /* --clr-fill: rgb(221, 255, 85); */
 
@@ -12,7 +12,7 @@
   --range-thumb-height: 20px;
   --range-slider-width: 300px;
   --range-slider-height: 5px;
-  --range-thumb-color: rgb(0, 0, 0);
+  --range-thumb-color: #28282b;
   --range-slider-color: rgba(0, 0, 0, 0.2);
 }
 
@@ -108,6 +108,8 @@ footer {
 #input-departments {
   font-size: 1.2rem;
   outline: none;
+  width: 158px;
+  height: 30px;
 }
 
 .input-container {
@@ -128,7 +130,7 @@ footer {
 .input-container:active,
 .wrapper:hover,
 .wrapper:active {
-  border: 2px solid black;
+  border: 2px solid #28282b;
 }
 
 input::-webkit-calendar-picker-indicator {
@@ -180,14 +182,32 @@ input::-webkit-calendar-picker-indicator {
   height: 157px;
   margin-top: -20px;
   margin-bottom: -28px;
-  margin-left: 30px;
-  margin-right: 20px;
+  margin-left: 25px;
+  margin-right: 25px;
+}
+
+.classic-input {
+  display: flex;
+  align-items: center;
+  font-size: 1.2rem;
+  width: 7rem;
+  height: 30px;
+  border: 2px solid var(--clr-border);
+  border-radius: 8px;
+  padding-left: 15px;
+}
+
+.classic-input:hover,
+.classic-input:focus {
+  outline: none;
+  border: 2px solid var(--clr-text);
 }
 
 .table-heading {
   display: flex;
   align-items: center;
-  height: 26px;
+  height: 50px;
+  margin-bottom: -2px;
   border: 2px solid var(--clr-border);
   border-bottom: none;
   border-top-left-radius: 12px;
@@ -202,30 +222,34 @@ input::-webkit-calendar-picker-indicator {
 }
 
 .table-heading > p:nth-child(2) {
-  margin-left: 54px;
+  margin-left: 70px;
 }
 
 .table-heading > p:nth-child(3) {
-  margin-left: 76px;
+  margin-left: 90px;
 }
 
 .table-heading > p:nth-child(4) {
-  margin-left: 107px;
+  margin-left: 114px;
 }
 
 .table-heading > p:nth-child(5) {
-  margin-left: 214px;
+  margin-left: 198px;
 }
 
 table {
   border-collapse: collapse;
   border: 2px solid var(--clr-border);
   width: 100%;
-  font-size: 1.35rem;
+  font-size: 1.25rem;
+}
+
+tr {
+  border-top: 2px solid var(--clr-border);
 }
 
 td {
-  border-top: 2px solid var(--clr-border);
+  padding: 13px;
 }
 
 tr:nth-child(even) {
@@ -237,7 +261,16 @@ tr:nth-child(even) {
 }
 
 .table-index {
-  padding-left: 25px;
+  padding-left: 24px;
+}
+
+.add-new-worker-wrapper {
+  display: flex;
+}
+
+.add-new-worker-data-inputs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
 }
 
 .wrapper {
@@ -301,7 +334,7 @@ input[type="range"]::-webkit-slider-thumb {
   -webkit-appearance: none;
   height: 1.7em;
   width: 1.7em;
-  background-color: black;
+  background-color: #28282b;
   cursor: pointer;
   margin-top: -9px;
   pointer-events: auto;
@@ -314,7 +347,7 @@ input[type="range"]::-moz-range-thumb {
   width: 1.5em;
   cursor: pointer;
   border-radius: 50%;
-  background-color: black;
+  background-color: #28282b;
   pointer-events: auto;
 }
 
@@ -324,17 +357,17 @@ input[type="range"]::-ms-thumb {
   width: 1.7em;
   cursor: pointer;
   border-radius: 50%;
-  background-color: black;
+  background-color: #28282b;
   pointer-events: auto;
 }
 
 input[type="range"]:active::-webkit-slider-thumb {
   background-color: #ffffff;
-  border: 3px solid black;
+  border: 3px solid #28282b;
 }
 
 .values {
-  background-color: black;
+  background-color: #28282b;
   width: 56%;
   position: relative;
   margin: auto;
@@ -351,7 +384,7 @@ input[type="range"]:active::-webkit-slider-thumb {
   position: absolute;
   height: 0;
   width: 0;
-  border-top: 15px solid black;
+  border-top: 15px solid #28282b;
   border-left: 15px solid transparent;
   border-right: 15px solid transparent;
   margin: auto;
