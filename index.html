@@ -115,7 +115,7 @@
                 <div class="form-input">
                   <p class="label-text">Department:</p>
                   <div>
-                    <input list="departments-form" id="input-departments-form" class="classic-input" placeholder="View all">
+                    <input list="departments-form" id="input-departments-form" class="classic-input">
                     <datalist id="departments-form">
                       <option value="IT">
                       <option value="Sales">
@@ -126,12 +126,17 @@
                 <div class="form-input">
                   <p class="label-text">Salary:</p>
                   <div class="form-salary">
-                    <input class="number">
+                    <!-- style first and second input so they will look like one -->
+                    <input type="number" class="classic-input-salary">
+                    <input list="currency-type-input" id="currency-type-input-form" class="classic-input-currency">
+                    <datalist id="currency-type-input">
+                      <!-- generate options with vue.js -->
+                    </datalist>
                   </div>
                 </div>
               </div>
             </div>
-            <button></button>
+            <button class="submit-form-button">Add new worker</button>
           </div>   
               
         </div>

@@ -31,10 +31,9 @@
 }
 
 .container-main {
-  min-width: 1000px;
-  max-width: 1000px;
-  min-height: 80vh;
-  max-height: fit-content;
+  width: 1060px;
+  min-height: 802.5px;
+  height: 84vh;
   margin: 40px;
   padding: 40px;
   border-radius: 25px;
@@ -182,25 +181,108 @@ input::-webkit-calendar-picker-indicator {
   height: 157px;
   margin-top: -20px;
   margin-bottom: -28px;
-  margin-left: 25px;
-  margin-right: 25px;
+  margin-left: 22px;
+  margin-right: 22px;
 }
 
 .classic-input {
   display: flex;
   align-items: center;
   font-size: 1.2rem;
-  width: 7rem;
+  width: 8rem;
   height: 30px;
   border: 2px solid var(--clr-border);
   border-radius: 8px;
-  padding-left: 15px;
+  padding-left: 10px;
+  margin-right: 20px;
+}
+
+.classic-input:nth-child(2n) {
+  margin-bottom: 7px;
 }
 
 .classic-input:hover,
-.classic-input:focus {
+.classic-input:focus,
+.classic-input-salary:hover,
+.classic-input-salary:focus {
   outline: none;
   border: 2px solid var(--clr-text);
+}
+
+.classic-input-currency:hover,
+.classic-input-currency:focus {
+  outline: none;
+  border: 2px solid var(--clr-text);
+  margin-left: -2px;
+}
+
+.form-salary {
+  display: flex;
+}
+
+.classic-input-salary {
+  display: flex;
+  align-items: center;
+  font-size: 1.2rem;
+  width: 4.6rem;
+  height: 30px;
+  border: 2px solid var(--clr-border);
+  border-radius: 8px 0 0 8px;
+  padding-left: 10px;
+}
+
+.classic-input-currency {
+  display: flex;
+  align-items: center;
+  font-size: 1.2rem;
+  width: 2.5rem;
+  height: 30px;
+  border: 2px solid var(--clr-border);
+  border-left: none;
+  border-radius: 0 8px 8px 0;
+  padding-left: 7px;
+  padding-right: 5px;
+}
+
+.submit-form-button {
+  display: flex;
+  align-self: flex-end;
+  align-items: center;
+  height: 96.5px;
+  width: 100px;
+  margin-bottom: 2px;
+  border: 2px solid var(--clr-border);
+  border-radius: 10px;
+  font-size: 1.4rem;
+  font-weight: bold;
+  line-height: 100%;
+  color: var(--clr-text);
+  background-color: var(--clr-background);
+  transition: all 0.3s;
+}
+
+.submit-form-button:hover {
+  cursor: pointer;
+  background-color: var(--clr-text);
+  color: var(--clr-background);
+  transform: scale(1.1);
+}
+
+.submit-form-button:active {
+  transform: scale(0.95);
+}
+
+/* delete arrows from number input */
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
 }
 
 .table-heading {
