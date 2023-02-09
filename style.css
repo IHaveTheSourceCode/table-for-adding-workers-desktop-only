@@ -178,7 +178,7 @@ input::-webkit-calendar-picker-indicator {
 .vertical-line {
   width: 2px;
   background-color: var(--clr-border);
-  height: 157px;
+  height: 161.6px;
   margin-top: -20px;
   margin-bottom: -28px;
   margin-left: 22px;
@@ -327,6 +327,7 @@ input[type="number"] {
 table {
   border-collapse: collapse;
   border: 2px solid var(--clr-border);
+  border-top: none;
   width: 100%;
   font-size: 1.25rem;
 }
@@ -614,4 +615,8 @@ p {
 .card-info h1 {
   font-size: 36px;
   text-shadow: rgba(0, 0, 0, 0.5) 0 10px 10px;
+}
+
+.invalid-input {
+  border-color: red;
 }
