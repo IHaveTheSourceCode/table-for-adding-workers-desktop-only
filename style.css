@@ -295,7 +295,6 @@ input[type="number"] {
   display: flex;
   align-items: center;
   height: 50px;
-  margin-bottom: -2px;
   border: 2px solid var(--clr-border);
   border-bottom: none;
   border-top-left-radius: 12px;
@@ -492,11 +491,6 @@ input[type="range"]:active::-webkit-slider-thumb {
 
 p {
   line-height: 1.5em;
-}
-
-h1 + p,
-p + p {
-  margin-top: 10px;
 }
 
 .card-container {

@@ -10,34 +10,10 @@
   </head>
   <body>
     <div id="app">
-      <!-- <div class="todo">
-        <h1>TODO</h1>
-        <ol>
-          <template v-for="task in taskList">
-            <task-item :task="task">
-              <ol type="a" v-if="task.subtaskList">
-                <template v-for="subtask in task.subtaskList">
-                  <task-item :task="subtask"></task-item>
-                </template>
-              </ol>
-            </task-item>
-          </template>
-        </ol>
-        <h2>Hints</h2>
-        <ol>
-          <li>
-            yarn global add browser-sync<br />
-            browser-sync --watch .
-          </li>
-          <li>&lt;datalist&gt;</li>
-        </ol>
-      </div> -->
       <div id="card-app" class="card-container">
         <card data-image="https://images.unsplash.com/photo-1602013104122-6cf742c5d220?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80">
           <h1 slot="header">TO DO</h1>
-          <!-- <p class="card-paragraph" slot="content">Test</p> -->
           <div class="todo" class="card-paragraph" slot="content">
-            <p>test</p>
             <ol>
               <template v-for="task in taskList">
                 <task-item :task="task">
@@ -197,23 +173,33 @@
         </div>
       </div>
     </div>
-
+    <!-- -->
+    
     <script>
-      const TaskItem = Vue.component("task-item", {
-        props: {
-          task: Object,
-        },
-        template:
-          '<li>{{task.title}} {{ task.completed ? "✅" : "❌"}}<slot name="default"></slot></li>',
-      });
+      function addObjectToLocalMemory(object_name, object_reference){
+        window.localStorage.setItem(objectName, JSON.stringify(object_reference));        
+      };
 
-      new Vue({
-        el: "#app",
-        components: {
-          TaskItem,
-        },
-        data: {
-          workerList: [
+      function returnObjectFromLocalMemory(object_name){
+        return JSON.parse(windows.localStorage.getItem(myObject));
+      };
+
+
+
+      function addWorker(){
+        // validate inputs
+        // add worker to the object with data
+        // update local memory content
+        table_data.workerList.push({
+          firstName: "Harry",
+          lastName: "Potter",
+          department: "Sales",
+          salary: {amount: 3000.5, currency: "USD"},
+        })
+      }
+
+      let table_data = {
+        workerList: [
             {
               firstName: "John",
               lastName: "Smith",
@@ -258,7 +244,7 @@
             },
             {
               title: "Add search form",
-              completed: false,
+              completed: true,
               subtaskList: [
                 { title: "person (text)", completed: false },
                 { title: "department (multiple choice)", completed: false },
@@ -270,21 +256,50 @@
               completed: false,
             },
             {
-              title: "Other improvements (feel free to add other improvements)",
-              completed: false,
+              title: "Other improvements:"
             },
             {
               title: "Please send us this file with your solutions",
               completed: false,
             },
           ],
+      };
+
+      const TaskItem = Vue.component("task-item", {
+        props: {
+          task: Object,
         },
+        template:
+          '<li>{{task.title}} {{ task.completed ? "✅" : "❌"}}<slot name="default"></slot></li>',
+      });
+
+      new Vue({
+        el: "#app",
+        components: {
+          TaskItem,
+        },
+        data:
+          table_data,
         computed: {
           salarySum() {
             return this.workerList.reduce((acc, i) => acc + i.salary.amount, 0);
           },
         },
       });
+
+      // arrays for currencies names and their exchange rate for USD
+      const CURRENCIES = ["AED" ,"AUD", "BRL", "CAD", "CHF", "CLP", "CNY", "COP", "CZK",
+       "DKK", "EUR", "GBP", "HKD", "HUF", "IDR", "ILS", "INR", "JPY", "KRW", "MXN", "MYR",
+        "NOK", "NZD", "PHP", "PLN", "RON", "RUB", "SAR", "SEK", "SGD", "THB", "TRY", "TWD",
+         "USD"];
+      const EXCHANGE_RATE = []
+
+      function convertCurrency(currency, value){
+        switch(currency){
+          case "AED":
+            return 
+        }
+      }
     </script>
     <!-- part of the double sided slider input -->
     <script>
