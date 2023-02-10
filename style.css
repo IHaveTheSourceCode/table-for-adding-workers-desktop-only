@@ -311,19 +311,19 @@ input[type="number"] {
 }
 
 .table-heading > p:nth-child(2) {
-  margin-left: 74px;
+  margin-left: 78px;
 }
 
 .table-heading > p:nth-child(3) {
-  margin-left: 96px;
+  margin-left: 102px;
 }
 
 .table-heading > p:nth-child(4) {
-  margin-left: 120px;
+  margin-left: 126px;
 }
 
 .table-heading > p:nth-child(5) {
-  margin-left: 210px;
+  margin-left: 220px;
 }
 
 table {

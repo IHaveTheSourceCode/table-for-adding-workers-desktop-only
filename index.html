@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="style.css" />
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.24/browser.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.3/jspdf.debug.js"></script>
   </head>
   <body>
     <div id="app">
@@ -673,10 +674,27 @@
   let workersTable = (JSON.parse(window.localStorage.getItem("workersTableData"))).workerList;
 
   let objectsContainer = [];
+  
+  PDF_DOWNLOAD_BTN.addEventListener("click", function(){
+    convertTable();
+
+    const csv = jsonToCsv(objectsContainer);
+
+    downloadCSVFile(csv);
+    tableToCSV();
+  });
+  
+  CSV_DOWNLOAD_BTN.addEventListener("click", function(){
+    convertTable();
+
+    const csv = jsonToCsv(objectsContainer);
+
+    downloadCSVFile(csv);
+    tableToCSV();
+  });
 
   // convert table rows to an object
   function convertTable(){
-    console.log(workersTable[0]);
     for(let i = 0; i < workersTable.length; i++){
       objectsContainer.push({
         ID: i+1,
@@ -709,18 +727,7 @@
     return csv;
 }
 
-  PDF_DOWNLOAD_BTN.addEventListener("click", function(){
-    // console.log(JSON.parse(window.localStorage.getItem("workersTableData")));
-    convertTable();
-
-    const csv = jsonToCsv(objectsContainer);
-
-    downloadCSVFile(csv);
-    tableToCSV();
-  });
-
   // forked from https://www.geeksforgeeks.org/how-to-export-html-table-to-csv-using-javascript/
- 
         function downloadCSVFile(csv_data) {
  
             // Create CSV file object and feed
@@ -734,7 +741,7 @@
             var temp_link = document.createElement('a');
  
             // Download csv file
-            temp_link.download = "GfG.csv";
+            temp_link.download = "Workers.csv";
             var url = window.URL.createObjectURL(CSVFile);
             temp_link.href = url;
  
@@ -747,6 +754,20 @@
             temp_link.click();
             document.body.removeChild(temp_link);
         }
+
+        convertTable();
+        var doc = new jsPDF();
+        doc.setFont("roboto", "bold");
+        doc.setFontSize(13);
+        objectsContainer.forEach(function(worker, i){
+          doc.text(10, 20 + (i * 10),
+          "ID: "+ i +
+          " First Name: "+ worker.firstName+
+          " Last Name: "+ worker.lastName+
+          " Department: "+ worker.department+
+          " Salary: "+ worker.salary);
+        });
+        doc.save('Workers.pdf')
 </script>
   </body>
 </html>
