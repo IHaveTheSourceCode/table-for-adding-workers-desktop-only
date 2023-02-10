@@ -25,14 +25,6 @@
                 </task-item>
               </template>
             </ol>
-            <h2>Hints</h2>
-            <ol>
-              <li>
-                yarn global add browser-sync<br />
-                browser-sync --watch .
-              </li>
-              <li>&lt;datalist&gt;</li>
-            </ol>
           </div>
         </card>
       </div>
@@ -65,7 +57,7 @@
             <p class="label-text">Search for person:</p>
             <div class="input-container">
               <img class="img-search" alt="" src="https://img.icons8.com/ios-glyphs/30/null/search--v1.png">
-              <input class="input-search" id="#search-filter" type="text" placeholder="Search">
+              <input class="input-search" id="search-filter" type="text" placeholder="Search">
             </div>
           </div>
           <!-- <datalist> input for searching by department -->
@@ -165,7 +157,7 @@
               <tr class="summary-table-cell">
                 <td colspan="3"></td>
                 <td>Summary</td>
-                <td>{{salarySum}} USD</td>
+                <td id="summary-cell">21000.5 USD</td>
               </tr>
             </tfoot>
           </table>
@@ -187,7 +179,7 @@
               firstName: "Jane",
               lastName: "Doe",
               department: "IT",
-              salary: { amount: 3000.5, currency: "USD" },
+              salary: { amount: 3000, currency: "USD" },
             },
             {
               firstName: "Bob",
@@ -223,9 +215,9 @@
               title: "Add search form",
               completed: true,
               subtaskList: [
-                { title: "person (text)", completed: false },
-                { title: "department (multiple choice)", completed: false },
-                { title: "salary (range)", completed: false },
+                { title: "person (text)", completed: true },
+                { title: "department (multiple choice)", completed: true },
+                { title: "salary (range)", completed: true },
               ],
             },
             {
@@ -289,7 +281,7 @@
       function convertCurrency(currency, value){
         for(let i = 0; i < CURRENCIES.length; i++){
           if(currency === CURRENCIES[i]){
-            return Number(Number(value * EXCHANGE_RATE[i]).toFixed(2));
+            return Number(Number(value * EXCHANGE_RATE[i]).toFixed(0));
           }
         }
       }
@@ -330,9 +322,21 @@
         }
 
         resetInputsValues();
-
+        
         // update local memory content
         addObjectToLocalMemory("workersTableData", table_data);
+
+        function updateSallarySum(){
+        let sum = 0;
+        document.querySelector("tbody").querySelectorAll("tr:not(.hide)").forEach(tr => {
+          sum += Number(tr.cells[4].textContent.replace(/\D/g,''));
+          console.log(sum);
+        });
+          document.querySelector("#summary-cell").innerText = sum + " USD";
+        }
+
+        setTimeout(updateSallarySum, 1);
+
       }
       
       // function that will validate inputs for creating new worker
@@ -582,17 +586,84 @@
 <script>
   // function that will filter table based on user's input
   function filterTable(){
-    let name = document.querySelector("#search-filter").value;
-    let department= document.querySelector("#input-departments").value;
-    let slider1 = document.querySelector("#slider-1").value;
-    let slider2 = document.querySelector("#slider-2").value;
+    let name = (document.querySelector("#search-filter")).value;
+    let department= (document.querySelector("#input-departments")).value;
+    let minSalary = (document.querySelector("#slider-1")).value;
+    let maxSalary = (document.querySelector("#slider-2")).value;
 
-    function filterByRange(){}
+    const TABLE_BODY = document.querySelector("tbody");
 
-    function filterByDepartment(){}
+    let sum = 0;
 
-    function filterByName(){}
+    resetFiltering();
+
+    TABLE_BODY.querySelectorAll("tr").forEach(tr => {
+      filterByName(tr, name);
+      filterByRange(tr, minSalary, maxSalary);
+      filterByDepartment(tr, department);
+    });
+
+    changeSum();
+
+    function filterByRange(tr, minSalary, maxSalary){
+      if(!(((Number(tr.cells[4].textContent.replace(/\D/g,''))) >= minSalary) && ((Number(tr.cells[4].textContent.replace(/\D/g,''))) <= maxSalary))){
+        tr.classList.add("hide");
+      }
+    }
+
+    function filterByName(tr, name){
+      if(name !== ""){
+        if(!(name.toLowerCase() == tr.cells[1].textContent.toLowerCase() || name.toLowerCase() == tr.cells[2].textContent.toLowerCase())){
+          tr.classList.add("hide");
+        }
+      }
+    }
+
+    function filterByDepartment(tr, department){
+      if((department != "") && (department != "View all")){
+        if(!(tr.cells[3].textContent == department)){
+          tr.classList.add("hide");
+        }
+      }
+    }
+
+    function resetFiltering(){
+      TABLE_BODY.querySelectorAll("tr").forEach(tr => {
+        tr.classList.remove("hide");
+      })
+    }
+    function changeSum(){
+      TABLE_BODY.querySelectorAll("tr:not(.hide)").forEach(tr => {
+        sum += Number(tr.cells[4].textContent.replace(/\D/g,''));
+      });
+      document.querySelector("#summary-cell").innerText = sum + " USD";
+    }
   }
+
+  // add filtering events to inputs
+  document.querySelector("#search-filter").addEventListener("change", function(){
+    filterTable();
+  });
+  document.querySelector("#input-departments").addEventListener("change", function(){
+    filterTable();
+  });
+  document.querySelector("#slider-1").addEventListener("change", function(){
+    filterTable();
+  });
+  document.querySelector("#slider-2").addEventListener("change", function(){
+    filterTable();
+  });
+
+  function updateSallarySum(){
+  let sum = 0;
+  document.querySelector("tbody").querySelectorAll("tr:not(.hide)").forEach(tr => {
+    sum += Number(tr.cells[4].textContent.replace(/\D/g,''));
+  });
+    document.querySelector("#summary-cell").innerText = sum + " USD";
+  }
+
+  updateSallarySum();
+
 </script>
   </body>
 </html>
