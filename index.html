@@ -32,7 +32,7 @@
         <div class="table-header">
           <h2>Workers</h2>
           <div class="header-buttons-container">
-          <button class="btn-download">
+          <button class="btn-download" id="btn-pdf">
             <img
               class="img-download"
               src="https://img.icons8.com/ios-glyphs/30/null/downloading-updates.png"
@@ -40,7 +40,7 @@
             ></img>
             <p>PDF</p>
           </button>
-          <button class="btn-download">
+          <button class="btn-download" id="btn-csv">
             <img
               class="img-download"
               src="https://img.icons8.com/ios-glyphs/30/null/downloading-updates.png"
@@ -222,19 +222,21 @@
             },
             {
               title: "Add summary of salary per department",
-              completed: false,
+              completed: true,
             },
             {
-              title: "Other improvements:",subtaskList: [
+              title: "Other improvements:",
+              completed: true,
+              subtaskList: [
                 { title: "Added auto conventer for currency", completed: true },
-                { title: "", completed: true },
-                { title: "", completed: true },
-                { title: "", completed: true },
+                { title: "Table's data is saved in local memory", completed: true },
+                { title: "Table can be downloaded as CSV", completed: false },
+                { title: "Table can be downloaded as PDF", completed: false },
               ],
             },
             {
               title: "Please send us this file with your solutions",
-              completed: false,
+              completed: true,
             },
           ],
       };
@@ -330,7 +332,6 @@
         let sum = 0;
         document.querySelector("tbody").querySelectorAll("tr:not(.hide)").forEach(tr => {
           sum += Number(tr.cells[4].textContent.replace(/\D/g,''));
-          console.log(sum);
         });
           document.querySelector("#summary-cell").innerText = sum + " USD";
         }
@@ -664,6 +665,88 @@
 
   updateSallarySum();
 
+</script>
+<script>
+  const PDF_DOWNLOAD_BTN = document.querySelector("#btn-pdf");
+  const CSV_DOWNLOAD_BTN = document.querySelector("#btn-csv");
+
+  let workersTable = (JSON.parse(window.localStorage.getItem("workersTableData"))).workerList;
+
+  let objectsContainer = [];
+
+  // convert table rows to an object
+  function convertTable(){
+    console.log(workersTable[0]);
+    for(let i = 0; i < workersTable.length; i++){
+      objectsContainer.push({
+        ID: i+1,
+        firstName: workersTable[i].firstName,
+        lastName: workersTable[i].lastName,
+        department: workersTable[i].department,
+        salary: workersTable[i].salary.amount + " USD",
+      })
+    }
+  }
+  
+  // forked from https://codingbeautydev.com/blog/javascript-convert-json-to-csv/
+  function jsonToCsv(items) {
+    const header = Object.keys(items[0]);
+
+    const headerString = header.join(',');
+
+    // handle null or undefined values here
+    const replacer = (key, value) => value ?? '';
+
+    const rowItems = items.map((row) =>
+      header
+        .map((fieldName) => JSON.stringify(row[fieldName], replacer))
+        .join(',')
+    );
+
+    // join header and body, and break into separate lines
+    const csv = [headerString, ...rowItems].join('\r\n');
+
+    return csv;
+}
+
+  PDF_DOWNLOAD_BTN.addEventListener("click", function(){
+    // console.log(JSON.parse(window.localStorage.getItem("workersTableData")));
+    convertTable();
+
+    const csv = jsonToCsv(objectsContainer);
+
+    downloadCSVFile(csv);
+    tableToCSV();
+  });
+
+  // forked from https://www.geeksforgeeks.org/how-to-export-html-table-to-csv-using-javascript/
+ 
+        function downloadCSVFile(csv_data) {
+ 
+            // Create CSV file object and feed
+            // our csv_data into it
+            CSVFile = new Blob([csv_data], {
+                type: "text/csv"
+            });
+ 
+            // Create to temporary link to initiate
+            // download process
+            var temp_link = document.createElement('a');
+ 
+            // Download csv file
+            temp_link.download = "GfG.csv";
+            var url = window.URL.createObjectURL(CSVFile);
+            temp_link.href = url;
+ 
+            // This link should not be displayed
+            temp_link.style.display = "none";
+            document.body.appendChild(temp_link);
+ 
+            // Automatically click the link to
+            // trigger download
+            temp_link.click();
+            document.body.removeChild(temp_link);
+        }
 </script>
   </body>
 </html>
