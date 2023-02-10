@@ -289,7 +289,7 @@
       function convertCurrency(currency, value){
         for(let i = 0; i < CURRENCIES.length; i++){
           if(currency === CURRENCIES[i]){
-            return value * EXCHANGE_RATE[i];
+            return Number(Number(value * EXCHANGE_RATE[i]).toFixed(2));
           }
         }
       }
