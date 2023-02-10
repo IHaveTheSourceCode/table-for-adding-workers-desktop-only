@@ -613,8 +613,9 @@ p {
 }
 
 .card-info h1 {
-  font-size: 36px;
+  font-size: 3rem;
   text-shadow: rgba(0, 0, 0, 0.5) 0 10px 10px;
+  margin-bottom: 1rem;
 }
 
 .invalid-input {

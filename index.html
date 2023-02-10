@@ -139,7 +139,7 @@
                 </div>
               </div>
             </div>
-            <button class="submit-form-button">Add new worker</button>
+            <button class="submit-form-button" id="submit-form">Add new worker</button>
           </div>   
               
         </div>
@@ -175,27 +175,7 @@
     <!-- -->
     
     <script>
-      function addObjectToLocalMemory(object_name, object_reference){
-        window.localStorage.setItem(objectName, JSON.stringify(object_reference));        
-      };
-
-      function returnObjectFromLocalMemory(object_name){
-        return JSON.parse(windows.localStorage.getItem(myObject));
-      };
-
-      function addWorker(){
-        // validate inputs
-        // add worker to the object with data
-        // update local memory content
-        table_data.workerList.push({
-          firstName: "Harry",
-          lastName: "Potter",
-          department: "Sales",
-          salary: {amount: 3000.5, currency: "USD"},
-        })
-      }
-
-      let table_data = {
+      let table_data = returnObjectFromLocalMemory("workersTableData") || {
         workerList: [
             {
               firstName: "John",
@@ -231,12 +211,12 @@
           taskList: [
             {
               title: "Add form to add new worker",
-              completed: false,
+              completed: true,
               subtaskList: [
-                { title: "firstName", completed: false },
-                { title: "lastName", completed: false },
-                { title: "department", completed: false },
-                { title: "salary amount and currency", completed: false },
+                { title: "firstName", completed: true },
+                { title: "lastName", completed: true },
+                { title: "department", completed: true },
+                { title: "salary amount and currency", completed: true },
               ],
             },
             {
@@ -327,6 +307,34 @@
 
       fillCurrencyDatalist();
 
+      function addObjectToLocalMemory(object_name, object_reference){
+        window.localStorage.setItem(object_name, JSON.stringify(object_reference));        
+      };
+
+      function returnObjectFromLocalMemory(object_name){
+        return JSON.parse(window.localStorage.getItem(object_name));
+      };
+
+      function addWorker(){
+        table_data.workerList.push({
+          firstName: document.querySelector("#fname").value,
+          lastName: document.querySelector("#lname").value,
+          department: document.querySelector("#input-departments-form").value,
+          salary: {amount: convertCurrency(document.querySelector("#currency-type-input-form").value, document.querySelector("#salary").value), currency: "USD"},
+        });
+
+        function resetInputsValues(){
+          document.querySelector("#fname").value = "";
+          document.querySelector("#lname").value = "";
+          document.querySelector("#salary").value = "";
+        }
+
+        resetInputsValues();
+
+        // update local memory content
+        addObjectToLocalMemory("workersTableData", table_data);
+      }
+      
       // function that will validate inputs for creating new worker
       function validateWorkerInputs(){
         const fnameInput = document.querySelector("#fname");
@@ -334,9 +342,125 @@
         const departmentInput = document.querySelector("#input-departments-form");
         const salaryInput = document.querySelector("#salary");
         const currencyInput = document.querySelector("#currency-type-input-form");
+
+        // function that resets form inputs styles
+        function resetStyles(){
+          fnameInput.classList.remove("invalid-input");
+          lnameInput.classList.remove("invalid-input");
+          departmentInput.classList.remove("invalid-input");
+          salaryInput.classList.remove("invalid-input");
+          currencyInput.classList.remove("invalid-input");
+        }
+
+        resetStyles();
+
+        let currencyValidity = true;
+        let departmentValidity = true;
+        let emptinessValidity = true;
+        let wordsValidity = true;
+        let numbersValidity = true;
+
+        // checks if selected currency is available
+        function checkCurrencyAvailability(){
+          for(let i = 0; i < CURRENCIES.length; i++){
+            if(CURRENCIES[i] !== currencyInput.value){
+              currencyValidity = false;
+              currencyInput.classList.add("invalid-input");
+            }else{
+              currencyValidity = true;
+              currencyInput.classList.remove("invalid-input");
+              return;
+            }
+          }
+        }
+
+        checkCurrencyAvailability();
+
+        // checks if selected department is avaible
+        const DEPARTMENTS = ["IT", "Sales", "Administration"];
+
+        function checkDepartmentAvailability(){
+          for(let i = 0; i < DEPARTMENTS.length; i++){
+            if(DEPARTMENTS[i] !== departmentInput.value){
+              departmentValidity = false;
+              departmentInput.classList.add("invalid-input");
+            }else{
+              departmentValidity = true;
+              departmentInput.classList.remove("invalid-input");
+              return;
+            }
+          }
+        }
+
+        checkDepartmentAvailability();
+
+        // checks if the inputs are not empty
+        function checkIfEmpty(){
+          if(fnameInput.value === ""){
+            emptinessValidity = false;
+            fnameInput.classList.add("invalid-input");
+
+          }if(lnameInput.value === ""){
+            emptinessValidity = false;
+            lnameInput.classList.add("invalid-input");
+
+          }if(departmentInput.value === ""){
+            emptinessValidity = false;
+            departmentInput.classList.add("invalid-input");
+            
+          }if(salaryInput.value === ""){
+            emptinessValidity = false;
+            salaryInput.classList.add("invalid-input");
+            
+          }if(currencyInput.value === ""){
+            emptinessValidity = false;
+            currencyInput.classList.add("invalid-input");
+          }
+        };
+
+        checkIfEmpty();
+
+        // checks if fname, lname are only letters, no spaces
+        function checkWords(){
+          if(fnameInput.value !== ""){
+            if(!(/^[A-Za-z]+$/.test(fnameInput.value))){
+              fnameInput.classList.add("invalid-input");
+              wordsValidity = false;
+            }};
+          if(lnameInput.value !== ""){
+            if(!(/^[A-Za-z]+$/.test(lnameInput.value))){
+              lnameInput.classList.add("invalid-input");
+              wordsValidity = false;
+            }}
+        };
+
+        checkWords();
+
+        // checks if salary contains only numbers and no spaces
+        function checkNumbers(){
+          if(salaryInput.value !== ""){
+          if(!(/^[0-9]+$/.test(salaryInput.value))){
+            salaryInput.classList.add("invalid-input");
+            numbersValidity = false;
+          }};
+        };
+
+        checkNumbers();
+
+        return (currencyValidity && departmentValidity && emptinessValidity && wordsValidity && numbersValidity);
       }
 
+      // adds events to form submit button, which checks form validity
+      const submitButton = document.querySelector("#submit-form");
+
+      submitButton.addEventListener("click", function(){
+        if(validateWorkerInputs()){
+          addWorker();
+        }
+      });
+
     </script>
+
     <!-- part of the double sided slider input -->
     <script>
     window.onload = function(){
