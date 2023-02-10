@@ -25,6 +25,8 @@
   width: 100vw;
   height: 100vh;
   display: flex;
+  justify-content: center;
+  align-items: center;
   background-color: var(--clr-background);
   color: var(--clr-text);
   font-size: 1.2rem;
@@ -620,4 +622,14 @@ p {
 
 .invalid-input {
   border-color: red;
+}
+
+.hide {
+  display: hidden;
+}
+
+@media screen and (max-width: 1700px) {
+  #card-app {
+    display: none;
+  }
 }

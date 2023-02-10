@@ -65,7 +65,7 @@
             <p class="label-text">Search for person:</p>
             <div class="input-container">
               <img class="img-search" alt="" src="https://img.icons8.com/ios-glyphs/30/null/search--v1.png">
-              <input class="input-search" type="text" placeholder="Search">
+              <input class="input-search" id="#search-filter" type="text" placeholder="Search">
             </div>
           </div>
           <!-- <datalist> input for searching by department -->
@@ -73,7 +73,7 @@
             <p class="label-text">Search by department:</p>
             <div>
               <input list="departments" id="input-departments" class="input-container" placeholder="View all">
-              <datalist id="departments">
+              <datalist id="departments" id="#department-filter">
                 <option value="View all">
                 <option value="IT">
                 <option value="Sales">
@@ -578,6 +578,21 @@
     const app = new Vue({
       el: '#card-app'
     });
+</script>
+<script>
+  // function that will filter table based on user's input
+  function filterTable(){
+    let name = document.querySelector("#search-filter").value;
+    let department= document.querySelector("#input-departments").value;
+    let slider1 = document.querySelector("#slider-1").value;
+    let slider2 = document.querySelector("#slider-2").value;
+
+    function filterByRange(){}
+
+    function filterByDepartment(){}
+
+    function filterByName(){}
+  }
 </script>
   </body>
 </html>
