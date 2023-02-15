@@ -14,7 +14,6 @@
         --clr-background: rgb(255, 255, 255);
         --clr-text: #28282b;
         --clr-border: rgba(0, 0, 0, 0.2);
-        /* --clr-fill: rgb(221, 255, 85); */
 
         --font-main: "Roboto", sans-serif;
 
@@ -298,6 +297,10 @@
         margin: 0;
       }
 
+       input::-webkit-calendar-picker-indicator {
+        display: none !important;
+      }
+      
       /* Firefox */
       input[type="number"] {
         -moz-appearance: textfield;
